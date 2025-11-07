@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import React from "react";
+import "./App.css";
+import PokemonLoader from "./PokemonLoader";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div className="App pokemon-theme">
+      <header className="app-header">
+        <div className="logo-wrap">
+          <div className="poke-logo">Poké</div>
+          <h1 className="title">Pokedex Visual — ¡Explora Pokémon!</h1>
+        </div>
+        <p className="subtitle">Busca por nombre, filtra por tipo y carga más — con animaciones épicas.</p>
       </header>
+
+      <main className="app-main">
+        <PokemonLoader />
+      </main>
+
+   
     </div>
   );
 }

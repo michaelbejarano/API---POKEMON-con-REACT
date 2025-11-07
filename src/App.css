@@ -1,38 +1,239 @@
-.App {
-  text-align: center;
+/* src/App.css
+   Tema: POKEMON — UI vibrante + animaciones
+*/
+
+/* Fuentes */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Montserrat:wght@300;600;700&display=swap');
+
+:root{
+  --bg0: linear-gradient(180deg,#0f1724 0%, #071028 100%);
+  --card-bg: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  --accent: #ffcb05; /* amarillo pokémon */
+  --accent-2: #3b4cca; /* azul pokémon */
+  --glass: rgba(255,255,255,0.03);
+  --radius: 14px;
+  --shadow: 0 10px 30px rgba(3,7,18,0.6);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Base */
+*{box-sizing:border-box}
+body,html,#root{height:100%}
+body{
+  margin:0;
+  background: var(--bg0);
+  font-family: 'Montserrat', sans-serif;
+  color:#e6eef8;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* APP LAYOUT */
+.App { padding:32px; min-height:100vh; display:flex; flex-direction:column; gap:20px; }
+.app-header { text-align:center; margin-bottom:6px; }
+.logo-wrap { display:flex; align-items:center; gap:16px; justify-content:center; }
+.poke-logo {
+  font-family: 'Fredoka One', sans-serif;
+  background: linear-gradient(90deg, var(--accent), #ff7b7b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size:36px;
+  letter-spacing:1px;
+  text-shadow: 0 6px 30px rgba(59,76,202,0.06);
+}
+.title { margin:0; font-weight:700; color:var(--accent-2); text-shadow: 0 2px 18px rgba(59,76,202,0.12); }
+.subtitle { margin-top:6px; color:#cfe0ff; opacity:0.9 }
+
+/* Controls */
+.pokemon-section { max-width:1200px; margin:0 auto; }
+.controls { display:flex; gap:12px; justify-content:center; align-items:center; margin-bottom:18px; flex-wrap:wrap; }
+.search-input {
+  padding:10px 14px;
+  border-radius:12px;
+  border: none;
+  width:320px;
+  max-width:80%;
+  outline:none;
+  background: rgba(255,255,255,0.03);
+  color: #eaf2ff;
+  box-shadow: 0 6px 20px rgba(59,76,202,0.06);
+}
+.type-select {
+  padding:10px 12px;
+  border-radius:12px;
+  border:none;
+  background: rgba(255,255,255,0.03);
+  color:#eaf2ff;
+  outline:none;
+}
+.btn-clear {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.06);
+  padding:10px 12px;
+  border-radius:10px;
+  color:#fff;
+  cursor:pointer;
+  transition: all .18s;
+}
+.btn-clear:hover { transform:translateY(-3px); box-shadow:0 12px 30px rgba(0,0,0,0.6); }
+
+/* GRID */
+.grid {
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap:18px;
+  align-items:stretch;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* POKE CARD - flip 3D */
+.poke-card {
+  perspective: 1200px;
+  animation: cardIn .55s ease both;
+  /* small glass/card style */
+}
+.card-inner {
+  position:relative;
+  width:100%;
+  min-height:320px;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(.2,.9,.3,1);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.poke-card:hover .card-inner { transform: rotateY(12deg) translateY(-8px) scale(1.02); }
+
+/* front / back faces */
+.card-front, .card-back {
+  position:absolute;
+  inset:0;
+  backface-visibility: hidden;
+  border-radius: var(--radius);
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:space-between;
+  padding:18px;
+  background: var(--card-bg);
+  border: 1px solid rgba(255,255,255,0.04);
 }
 
-.App-link {
-  color: #61dafb;
+/* back is slightly rotated */
+.card-back {
+  transform: rotateY(180deg);
+  background: linear-gradient(180deg, rgba(59,76,202,0.08), rgba(0,0,0,0.18));
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* picture area */
+.poke-art {
+  width:100%;
+  height:190px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  position:relative;
+  border-radius:12px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  margin-bottom:8px;
+  transition: transform .4s;
+}
+.poke-art img{
+  max-width:140px;
+  max-height:140px;
+  transform: translateY(-6px);
+  filter: drop-shadow(0 12px 24px rgba(59,76,202,0.18));
+}
+
+/* name and types */
+.poke-name { text-transform: capitalize; color:var(--accent); font-weight:700; margin:6px 0; letter-spacing:0.6px; }
+.types { display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin-bottom:8px; }
+.type-pill {
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:12px;
+  text-transform:capitalize;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.03);
+}
+
+/* small back content */
+.back-head { text-align:center; color:#fff; }
+.stats { display:flex; gap:10px; justify-content:center; margin-top:8px; font-size:13px; color:#d8e7ff; }
+.back-actions { display:flex; justify-content:center; gap:8px; margin-top:12px; }
+
+/* mini buttons */
+.btn-mini {
+  background: linear-gradient(90deg,#ffd54a,#ffcb05);
+  border:none;
+  padding:8px 12px;
+  border-radius:10px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+/* Load more */
+.load-more-wrap { display:flex; justify-content:center; margin-top:18px; }
+.btn-load-more {
+  padding:12px 18px;
+  background: linear-gradient(90deg,var(--accent), #ff7b7b);
+  border:none;
+  border-radius:12px;
+  color:#051023;
+  font-weight:800;
+  cursor:pointer;
+  box-shadow: 0 10px 40px rgba(255,203,5,0.12);
+}
+
+/* empty state */
+.empty-state { text-align:center; padding:40px; color:#cfe0ff; }
+
+/* ANIMATIONS */
+/* entry animation for cards */
+@keyframes cardIn {
+  from { opacity:0; transform: translateY(24px) scale(.98); }
+  to { opacity:1; transform: translateY(0) scale(1); }
+}
+
+/* hover sheen */
+.poke-card:hover .poke-art::after{
+  content:'';
+  position:absolute;
+  left:-50%;
+  top:0;
+  width:50%;
+  height:100%;
+  transform: skewX(-20deg);
+  background: linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.12), rgba(255,255,255,0.06));
+  animation: sheen 0.8s forwards;
+}
+@keyframes sheen {
+  from { left:-50%; opacity:0; }
+  to { left:150%; opacity:1; }
+}
+
+/* type colors (a few examples) */
+.type-pill.fire { background: linear-gradient(90deg,#ff9a00,#ff5d3a); color:#fff; border:none; box-shadow:0 8px 30px rgba(255,100,40,0.12); }
+.type-pill.water { background: linear-gradient(90deg,#40bfff,#0066ff); color:#fff; border:none; }
+.type-pill.grass { background: linear-gradient(90deg,#7be495,#2db64b); color:#05260b; }
+.type-pill.electric { background: linear-gradient(90deg,#ffec4b,#ffd100); color:#05260b; }
+.type-pill.psychic { background: linear-gradient(90deg,#ff93d1,#ff5ca8); color:#211124; }
+.type-pill.normal { background: linear-gradient(90deg,#cfd3d9,#a9adb6); color:#101018; }
+
+/* subtle responsive */
+@media (max-width:700px) {
+  .grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap:12px; }
+  .card-inner { min-height:260px; }
+}
+
+/* Fancy sparkle background (subtle) */
+.pokemon-section::before{
+  content:'';
+  position:absolute;
+  left:0; right:0; top:0; bottom:0;
+  pointer-events:none;
+  background-image: radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity:0.06;
+  z-index:0;
 }
