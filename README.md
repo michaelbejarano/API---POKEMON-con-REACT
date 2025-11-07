@@ -41,11 +41,9 @@ npm install
 npm start
 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 🔥 Vista previa
 
-<img width="956" height="866" alt="image" src="https://github.com/user-attachments/assets/8a8577ba-8787-47eb-a048-bd6a79a0d367" />
+<p align="center">
+  <img src="https://raw.githubusercontent.com/michaelbejarano/API---POKEMON-con-REACT/main/public/pokedex-preview.png" width="800" alt="Vista previa Pokédex">
+</p>
 
-<img width="775" height="889" alt="image" src="https://github.com/user-attachments/assets/311fe391-bd24-4a8c-9b24-5dd0045983c9" />
-
-
-<img width="519" height="838" alt="image" src="https://github.com/user-attachments/assets/b4bcdc7b-f04e-487f-9760-b0163ee3ebb0" />
