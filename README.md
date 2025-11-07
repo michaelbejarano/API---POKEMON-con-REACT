@@ -43,7 +43,8 @@ npm start
 
 ## 🔥 Vista previa
 
+## 🔥 Vista previa
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/michaelbejarano/API---POKEMON-con-REACT/main/public/pokedex-preview.png" width="800" alt="Vista previa Pokédex">
 </p>
-
